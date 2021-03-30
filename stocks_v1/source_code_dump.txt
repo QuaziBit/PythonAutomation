@@ -1,0 +1,1121 @@
+    # test 3
+    def run_firefox_3(self, s0, s1, s):
+        print(f'\tRun FireFox Selenium for [www.zacks.com]')
+
+        # s0 = 1 # time in seconds --> system time
+        # s1 = 10 # time in seconds to wait for page to load
+        # s = 10 # Initialize the WebDriverWait, with 5 seconds of wait time. --> driver time
+        download_path = "C:\\Users\\alexm\Desktop\\Programs\\Software\\Programming\\ProgrammingProjects\\XHTML_CSS_JavaScript\\Python\\CrawlWebPage\\StockCrawler\\stocks\\\download\\"
+        fx_path = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+
+        # iframe url zacks.com
+        url = 'https://screener-api.zacks.com/?scr_type=stock&c_id=zacks&c_key=0675466c5b74cfac34f6be7dc37d4fe6a008e212e2ef73bdcd7e9f1f9a9bd377&ecv=2ITM2QTOyQDO&ref=screening#'
+
+        # ---------------------------------------------------------------------------------------------------- #
+        # firefox_dPath = "C:\Python\Drivers\BrowersDriver\Firefox\geckodriver.exe"
+        firefox_dPath = "drivers/Firefox/geckodriver.exe"
+
+        # find way to work with web browser popup window to save a csv file
+        # set up profile to work around popup window to safe files
+        options = OptionsFirefox()
+        options.set_preference("browser.download.manager.showWhenStarting", False)
+        options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/csv")
+        options.set_preference("browser.download.folderList", 2)
+        options.set_preference("browser.download.dir", download_path)
+        #options.update_preferences()
+        #browser = webdriver.WebDriver(firefox_profile=profile)
+
+        binary = FirefoxBinary(fx_path)
+        driver = webdriver.Firefox(firefox_options=options,executable_path=firefox_dPath)
+
+        driver.get(url)
+
+        driver.set_page_load_timeout(s1) 
+        wait = WebDriverWait(driver, s)
+
+        time.sleep(s0)
+
+        # Company Descriptors
+        tmp_xpath = '/html/body/main/section/div/div[2]/aside/div/div/div[2]/ul/li[2]/a'
+        company_descriptors = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        company_descriptors.click()
+        m = "Clicked Company Descriptors"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Exchange
+        tmp_xpath = '/html/body/main/section/div/div[2]/section/div[2]/div/div[2]/div/table/tbody/tr[1]/th/fieldset/span[2]/select/option[4]'
+        exchange = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        exchange.click()
+        m = "Clicked Exchange --> NSDQ"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Add
+        tmp_xpath = '/html/body/main/section/div/div[2]/section/div[2]/div/div[2]/div/table/tbody/tr[1]/td/a'
+        add = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        add.click()
+        m = "Clicked Add"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Size & Share Volume 
+        tmp_xpath = '/html/body/main/section/div/div[2]/aside/div/div/div[2]/ul/li[3]/a'
+        ss_volume = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        ss_volume.click()
+        m = "Clicked Size & Share Volume"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Avg Volume
+        val = 200000
+        tmp_xpath = '//*[@id="val_12015"]'
+        avg_volume = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        avg_volume.send_keys(f'{val}')
+        m = f"Insert value {val}"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Add
+        tmp_xpath = '/html/body/main/section/div/div[2]/section/div[2]/div/div[2]/div/table/tbody/tr[3]/td/a'
+        add = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        add.click()
+        m = "Clicked Add"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Price & Price Changes
+        tmp_xpath = '/html/body/main/section/div/div[2]/aside/div/div/div[2]/ul/li[4]/a'
+        pp_changes = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        pp_changes.click()
+        m = "Clicked Price & Price Changes"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Last Close
+        val = 5
+        tmp_xpath = '//*[@id="val_14005"]'
+        avg_volume = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        avg_volume.send_keys(f'{val}')
+        m = f"Insert value {val}"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Add
+        tmp_xpath = '/html/body/main/section/div/div[2]/section/div[2]/div/div[2]/div/table/tbody/tr[1]/td/a'
+        add = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        add.click()
+        m = "Clicked Add"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Run Screen
+        tmp_xpath = '//*[@id="run_screen_result"]'
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        run_screen.click()
+        m = "Clicked Run Screen"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        """
+        # Drop down menu: records per page [default 15] set it to 100
+        # Initialize the WebDriverWait, with 5 seconds of wait time.
+        tmp_xpath = '/html/body/main/section/div/div[4]/div/div[1]/div[2]/ul/li[10]/select/option[3]'
+        records_per_page = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        records_per_page.click()
+        m = "Clicked Records per page --> 100"
+        print(f'{m}')
+        """
+
+        time.sleep(s0)
+
+        
+        # download csv file
+        tmp_xpath = '/html/body/main/section/div/div[4]/div/div[1]/div[2]/div[1]/div/div[1]/a[1]'
+        records_per_page = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        records_per_page.click()
+        m = "Clicked CSV"
+        print(f'{m}')
+        
+        time.sleep(s0)
+
+        # Back to Screen --- My Criteria
+        tmp_xpath = '/html/body/main/section/div/div[4]/div/div[1]/div[1]/a[1]'
+        my_criteria = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        my_criteria.click()
+        m = "Clicked My Criteria"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Exchange
+        tmp_xpath = '/html/body/main/section/div/div[2]/section/div[1]/form/div/div[2]/table/tbody/tr/th/fieldset/div[1]/span[2]/select/option[5]'
+        exchange = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        exchange.click()
+        m = "Clicked Exchange --> NYSE"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Run Screen
+        tmp_xpath = '//*[@id="run_screen_result"]'
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        run_screen.click()
+        m = "Clicked Run Screen"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # download csv file
+        tmp_xpath = '/html/body/main/section/div/div[4]/div/div[1]/div[2]/div[1]/div/div[1]/a[1]'
+        records_per_page = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        records_per_page.click()
+        m = "Clicked CSV"
+        print(f'{m}')
+        
+        time.sleep(s0)
+
+        driver.quit()
+        m = "Quit driver."
+        print(f'{m}')
+
+
+
+
+    
+    
+    # test 1
+    def run_firefox_1(self):
+        firefox_dPath = "C:\Python\Drivers\BrowersDriver\Firefox\geckodriver.exe"
+        driver = webdriver.Firefox(executable_path=firefox_dPath)
+
+        driver.get("https://www.zacks.com/screening/stock-screener?icid=screening-screening-nav_tracking-zcom-main_menu_wrapper-stock_screener")
+
+        # Initialize the WebDriverWait, with 5 seconds of wait time.
+        s = 5
+        wait = WebDriverWait(driver, s)
+
+        # id: predefined-tab
+        # button basic: /html/body/main/section/div/div[7]/section/div/div/div[2]/p[4]/a[1]
+        # Earnings Growth & Surprise button
+        # Run Screener: /html/body/main/section/div/div[7]/section/div/div/div[2]/div/form/div[2]/ul/li[2]/p[2]/a[1]
+        
+        # click button
+        # accept_cookie
+        # cannot get element by id, so have to use xpath
+        accept_cookie = driver.find_element_by_xpath('//*[@id="accept_cookie"]')
+        accept_cookie.click()
+
+        # navigate to the iframe
+        frame = driver.find_element_by_xpath('//*[@id="screenerContent"]')
+        driver.switch_to.frame(frame)
+
+        # click button
+        # predefined_tab
+        predefined_tab = driver.find_element_by_id('predefined-tab')
+        predefined_tab.click()
+
+        # button_basic
+        tmp_xpath = '/html/body/main/section/div/div[7]/section/div/div/div[2]/p[4]/a[1]'
+        button_basic = wait.until(EC.presence_of_element_located((By.XPATH, tmp_xpath)))
+        button_basic.click()
+
+        # Section: Dividend & Earnings Growth --> Run Screen
+        tmp_xpath = '/html/body/main/section/div/div[7]/section/div/div/div[2]/div/form/div[2]/ul/li[2]/p[2]/a[1]'
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        run_screen.click()
+
+        # Section: Dividend & Earnings Growth --> Run Screen
+        tmp_xpath = '//*[@id="no_rec_count"]'
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        run_screen.select_by_value(quote_data["100"])
+
+        """
+        tbl_xpath = '//*[@id="screener_table"]'
+        ticker_xpath = '/html/body/main/section/div/div[4]/div/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/table/tbody/tr[1]/td[2]/a/span'
+        last_close_xpath = '/html/body/main/section/div/div[4]/div/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/table/tbody/tr[1]/td[3]'
+        """
+
+    # test 2
+    # ---------------------------------------------------------------------------------------------------- #
+    def run_firefox_2(self):
+        # for: zacks.com
+        # ---------------------------------------------------------------------------------------------------- #
+        # iframe url
+        url = 'https://screener-api.zacks.com/?scr_type=stock&c_id=zacks&c_key=0675466c5b74cfac34f6be7dc37d4fe6a008e212e2ef73bdcd7e9f1f9a9bd377&ecv=2ITM2QTOyQDO&ref=screening#'
+
+        firefox_dPath = "C:\Python\Drivers\BrowersDriver\Firefox\geckodriver.exe"
+
+        driver = webdriver.Firefox(executable_path=firefox_dPath)
+
+        driver.get(url)
+
+        # click button
+        # predefined_tab
+        predefined_tab = driver.find_element_by_id('predefined-tab')
+        predefined_tab.click()
+        m = "Clicked predefined-tab"
+        print(f'{m}')
+
+        # Initialize the WebDriverWait, with 5 seconds of wait time.
+        s = 5
+        wait = WebDriverWait(driver, s)
+
+        # basic
+        tmp_xpath = '/html/body/main/section/div/div[7]/section/div/div/div[2]/p[4]/a[1]'
+        basic_link = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        basic_link.click()
+        m = "Clicked Basic"
+        print(f'{m}')
+
+        # Section: Dividend & Earnings Growth --> Run Screen
+        tmp_xpath = '/html/body/main/section/div/div[7]/section/div/div/div[2]/div/form/div[2]/ul/li[2]/p[2]/a[1]'
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        run_screen.click()
+        m = "Clicked Dividend & Earnings Growth --> Run Screen"
+        print(f'{m}')
+
+        # Drop down menu: records per page [default 15] set it to 100
+        # Initialize the WebDriverWait, with 5 seconds of wait time.
+        tmp_xpath = '/html/body/main/section/div/div[4]/div/div[1]/div[2]/ul/li/select/option[3]'
+        records_per_page = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        records_per_page.click()
+        m = "Clicked Records per page --> 100"
+        print(f'{m}')
+
+        return driver
+
+    def read_table(self, driver):
+
+        time.sleep(2)
+
+        # Initialize the WebDriverWait, with 10 seconds of wait time.
+        s = 5
+        wait = WebDriverWait(driver, s)
+
+        # get stock tickers from the table
+        table_id = "screener_table"
+        num_tr = 1
+        mytable = wait.until(EC.presence_of_element_located((By.ID, table_id)))
+        for row in mytable.find_elements_by_css_selector('tr'):
+            tb_index = 0
+            for cell in row.find_elements_by_tag_name('td'):
+                if tb_index == 1:
+                    print(f'[{num_tr}] - ticker: {cell.text}')
+                if tb_index == 2:
+                    print(f'[{num_tr}] - last close: {cell.text}\n')
+                tb_index = tb_index + 1
+
+            num_tr = num_tr + 1
+
+        m = "Got all data from the table"
+        print(f'{m}')
+        # ---------------------------------------------------------------------------------------------------- #
+
+    # ---------------------------------------------------------------------------------------------------- #
+
+
+
+
+    
+    # for https://bigcharts.marketwatch.com/
+    # s0: time in seconds --> system time
+    # page_load_time: time in secods to wait for page to load
+    # driver_time: initialize the WebDriverWait --> driver time
+    def run_bigcharts(self, final_report, s0, page_load_time, wait_time, driver_time):
+        print(f'\tRun FireFox Selenium for [www.bigcharts.marketwatch.com]')
+
+        img_list = []
+
+        download_path = "C:\\Users\\alexm\Desktop\\Programs\\Software\\Programming\\ProgrammingProjects\\XHTML_CSS_JavaScript\\Python\\CrawlWebPage\\StockCrawler\\stocks\\\download\\"
+        fx_path = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+
+        # url https://bigcharts.marketwatch.com/
+        url = 'https://bigcharts.marketwatch.com/default.asp'
+
+        # ---------------------------------------------------------------------------------------------------- #
+        # firefox_dPath = "C:\Python\Drivers\BrowersDriver\Firefox\geckodriver.exe"
+        firefox_dPath = "drivers/Firefox/geckodriver.exe"
+
+        # find way to work with web browser popup window to save a csv file
+        # set up profile to work around popup window to safe files
+        options = OptionsFirefox()
+        options.set_preference("browser.download.manager.showWhenStarting", False)
+        options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/csv")
+        options.set_preference("browser.download.folderList", 2)
+        options.set_preference("browser.download.dir", download_path)
+        #options.update_preferences()
+        #browser = webdriver.WebDriver(firefox_profile=profile)
+
+        binary = FirefoxBinary(fx_path)
+        driver = webdriver.Firefox(firefox_options=options,executable_path=firefox_dPath)
+
+        driver.get(url)
+
+        driver.set_page_load_timeout(page_load_time)
+        wait = WebDriverWait(driver, wait_time)
+        driver.implicitly_wait(driver_time)
+
+        time.sleep(s0)
+
+        # values for bigcharts.marketwatch.com
+        # time: 6 month
+        # frequency: daily
+        # moving average: EMA (2-line) - 20 40
+        # uper indicators: none
+        # lower indicators 1: MACD
+        # lower indicators 2: Slow Stochastic
+        # lower indicators 3: Volume
+
+        # loop over generated report that has all tickers
+        # get the image chart from the bigcharts website based on the tickers
+        # save images in the word document
+
+        # section: init search
+        # init first run to get first ticker
+        ticker = ""
+        last_close = ""
+        index = 0
+        max_index = 0
+        for k in final_report:
+            ticker = final_report[k][0][0]
+            last_close = final_report[k][0][1]
+            print(f'\tticker: {ticker} --- last_close: {last_close}')
+            # self.open_url(driver, ticker)
+            if index == max_index:
+                break
+            index += 1
+
+        # Search
+        val = ticker
+        tmp_xpath = '/html/body/header/div[1]/div[3]/div[1]/form[3]/input[1]'
+        avg_volume = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        avg_volume.send_keys(f'{val}')
+        m = f"Insert value {val}"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # section: Advanced Chart 
+        # Advanced Chart
+        tmp_xpath = '/html/body/header/div[1]/div[3]/div[1]/form[3]/button[2]'
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        run_screen.click()
+        m = "Clicked Advanced Chart"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # section: time frame
+        # time
+        time_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[1]/select[1]/option[9]"
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, time_xPath)))
+        run_screen.click()
+        m = "Clicked Time: 6 month"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Frequency
+        frequency_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[1]/select[2]/option[6]"
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, frequency_xPath)))
+        run_screen.click()
+        m = "Clicked Frequency: Daily"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # section: indicator 
+        # indicator drop down
+        indicators_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/h3[3]/a"
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, indicators_xPath)))
+        run_screen.click()
+        m = "Clicked Indicator Drop Down"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Moving Evarage
+        mave_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[3]/select[1]/option[6]"
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, mave_xPath)))
+        run_screen.click()
+        m = "Clicked Moving Evarage"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # empty input
+        val = ""
+        tmp_xpath = '//*[@id="maval"]' # different input field
+        ticker_input = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        ticker_input.clear()
+        ticker_input.send_keys(val)
+        m = f"Insert value: clear"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # moving average value
+        val = "20 40"
+        mave_in_xPath = '//*[@id="maval"]' # input: 20 40
+        avg_volume = wait.until(EC.element_to_be_clickable((By.XPATH, mave_in_xPath)))
+        avg_volume.send_keys(f'{val}')
+        m = f"Insert value {val}"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Lower Indicator 1:
+        li_1_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[3]/select[3]/option[4]"
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, li_1_xPath)))
+        run_screen.click()
+        m = "Clicked Lower Indicator 1"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # Lower Indicator 2:
+        li_2_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[3]/select[4]/option[8]"
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, li_2_xPath)))
+        run_screen.click()
+        m = "Clicked Lower Indicator 2"
+        print(f'{m}')
+
+        time.sleep(s0)
+        
+        # Lower Indicator 3: 
+        li_3_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[3]/select[5]/option[2]"
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, li_3_xPath)))
+        run_screen.click()
+        m = "Clicked Lower Indicator 3"
+        print(f'{m}')
+
+        time.sleep(s0)
+        
+        # section: chart style
+        # price display drop down
+        price_display_dd = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/h3[4]/a"
+        price_display_dd = wait.until(EC.element_to_be_clickable((By.XPATH, price_display_dd)))
+        price_display_dd.click()
+        m = "Clicked Price Display Drop Down"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # price display
+        price_display = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[4]/select[1]/option[4]"
+        price_display = wait.until(EC.element_to_be_clickable((By.XPATH, price_display)))
+        price_display.click()
+        m = "Clicked Price Display"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        """
+        # chart background
+        chart_bg = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[4]/select[1]/option[4]"
+        chart_bg = wait.until(EC.element_to_be_clickable((By.XPATH, chart_bg)))
+        chart_bg.click()
+        m = "Clicked Chart Background"
+        print(f'{m}')
+
+        time.sleep(s0)
+        """
+
+        """
+        # chart size: large
+        chart_size = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[4]/select[3]/option[3]"
+        chart_size = wait.until(EC.element_to_be_clickable((By.XPATH, chart_size)))
+        chart_size.click()
+        m = "Clicked Chart Size"
+        print(f'{m}')
+
+        time.sleep(s0)
+        """
+
+        # generate image
+        draw_chart = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[3]/input"
+        run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, draw_chart)))
+        run_screen.click()
+        m = "Clicked Draw Chart"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # get graph that is just an image
+        img_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div/div[3]/table/tbody/tr/td[1]/img"
+        img_elm = wait.until(EC.element_to_be_clickable((By.XPATH, img_xPath)))
+        tmp_elm = img_elm.get_attribute('outerHTML')
+        print(f'[0] {ticker}: {tmp_elm}\n')
+
+        img_list.append(tmp_elm)
+        self.write_fragmens(tmp_elm, ticker, index)
+
+        time.sleep(s0)
+
+        # init first run to get first ticker
+        ticker = ""
+        last_close = ""
+        index = 1
+        for k in final_report:
+            # we need to start from the second ticker
+            if index >= 2:
+                t1 = datetime.datetime.now().second
+
+                ticker = final_report[k][0][0]
+                last_close = final_report[k][0][1]
+                print(f'ticker: {ticker} --- last_close: {last_close}')
+            
+                """
+                # Option 1
+                # --------------------------------------------------------------------------- #
+                # empty input
+                val = ""
+                tmp_xpath = '//*[@id="symb"]' # different input field
+                ticker_input = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+                ticker_input.clear()
+                ticker_input.send_keys(val)
+                m = f"Insert value: clear"
+                print(f'{m}')
+
+                # insert ticker value
+                tmp_xpath = '//*[@id="symb"]' # different input field
+                ticker_input = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+                ticker_input.send_keys(f'{ticker}')
+                m = f"Insert value {ticker}"
+                print(f'{m}')
+
+                # generate image
+                draw_chart = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[3]/input"
+                draw_chart = wait.until(EC.element_to_be_clickable((By.XPATH, draw_chart)))
+                draw_chart.click()
+                m = "Clicked Draw Chart"
+                print(f'{m}')
+
+                # time.sleep(s0)
+
+                # get graph that is just an image
+                img_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div/div[3]/table/tbody/tr/td[1]/img"
+                img_elm = wait.until(EC.element_to_be_clickable((By.XPATH, img_xPath)))
+                tmp_elm = img_elm.get_attribute('outerHTML')
+
+                img_list.append(tmp_elm)
+
+                t2 = datetime.datetime.now().second
+                dt = t2 - t1
+                print(f'{dt} seconds:')
+                print(f'[{index}] {ticker}: {tmp_elm}\n')
+
+                self.write_fragmens(tmp_elm, ticker)
+                # --------------------------------------------------------------------------- #
+                """
+
+                
+                # Option 2
+                # --------------------------------------------------------------------------- #
+                # no candle sticks
+                # b_url = f'''https://bigcharts.marketwatch.com/advchart/frames/frames.asp?show=&insttype=&symb={ticker}&x=47&y=17&time=7&startdate=1%2F4%2F1999&enddate=1%2F29%2F2021&freq=1&compidx=aaaaa%3A0&comptemptext=&comp=none&ma=5&maval=20+40&uf=0&lf=4&lf2=32&lf3=1&type=2&style=320&size=2&timeFrameToggle=false&compareToToggle=false&indicatorsToggle=false&chartStyleToggle=false&state=10'''
+
+                # using candle sticks
+                b_url = f'''https://bigcharts.marketwatch.com/advchart/frames/frames.asp?show=&insttype=&symb={ticker}&x=39&y=12&time=7&startdate=1%2F4%2F1999&enddate=2%2F1%2F2021&freq=1&compidx=aaaaa%3A0&comptemptext=&comp=none&ma=5&maval=20+40&uf=0&lf=4&lf2=32&lf3=1&type=4&style=320&size=2&timeFrameToggle=false&compareToToggle=false&indicatorsToggle=false&chartStyleToggle=false&state=11'''
+
+                driver.get(b_url)
+
+                # get graph that is just an image
+                img_xPath = "/html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div/div[3]/table/tbody/tr/td[1]/img"
+                tmp_elm = wait.until(EC.element_to_be_clickable((By.XPATH, img_xPath)))
+                img_elm = tmp_elm.get_attribute('outerHTML')
+
+                img_list.append(img_elm)
+                self.write_fragmens(img_elm, ticker, index)
+
+                print(f'[{index}] {ticker}: {img_elm}')
+
+                t2 = datetime.datetime.now().second
+                dt = t2 - t1
+                print(f'{dt} seconds\n')
+                # --------------------------------------------------------------------------- #
+
+                # every 40 loops wait for 10 seconds:
+                if (index % 40) == 0:
+                    time.sleep(10)
+
+            index += 1
+
+        return img_list
+
+    # for https://bigcharts.marketwatch.com/
+    # s0: time in seconds --> system time
+    # page_load_time: time in secods to wait for page to load
+    # driver_time: initialize the WebDriverWait --> driver time
+    def run_bigcharts_2(self, final_report, s0, page_load_time, wait_time, driver_time):
+        print(f'\tRun FireFox Selenium for [www.bigcharts.marketwatch.com]')
+
+        failed_tickers = []
+        total_run_time = 0 # in seconds
+        img_list = []
+
+        download_path = "C:\\Users\\alexm\Desktop\\Programs\\Software\\Programming\\ProgrammingProjects\\XHTML_CSS_JavaScript\\Python\\CrawlWebPage\\StockCrawler\\stocks\\\download\\"
+        fx_path = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+
+        # url https://bigcharts.marketwatch.com/
+        url = 'https://bigcharts.marketwatch.com/default.asp'
+
+        # ---------------------------------------------------------------------------------------------------- #
+        # firefox_dPath = "C:\Python\Drivers\BrowersDriver\Firefox\geckodriver.exe"
+        firefox_dPath = "drivers/Firefox/geckodriver.exe"
+
+        # find way to work with web browser popup window to save a csv file
+        # set up profile to work around popup window to safe files
+        options = OptionsFirefox()
+        options.set_preference("browser.download.manager.showWhenStarting", False)
+        options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/csv")
+        options.set_preference("browser.download.folderList", 2)
+        options.set_preference("browser.download.dir", download_path)
+        #options.update_preferences()
+        #browser = webdriver.WebDriver(firefox_profile=profile)
+
+        binary = FirefoxBinary(fx_path)
+        driver = webdriver.Firefox(firefox_options=options,executable_path=firefox_dPath)
+
+        driver.get(url)
+
+        driver.set_page_load_timeout(page_load_time)
+        driver.implicitly_wait(driver_time)
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # values for bigcharts.marketwatch.com
+        # time: 6 month
+        # frequency: daily
+        # moving average: EMA (2-line) - 20 40
+        # uper indicators: none
+        # lower indicators 1: MACD
+        # lower indicators 2: Slow Stochastic
+        # lower indicators 3: Volume
+
+        # loop over generated report that has all tickers
+        # get the image chart from the bigcharts website based on the tickers
+        # save images in the word document
+
+        # section: init search
+        # init first run to get first ticker
+        ticker = ""
+        last_close = ""
+        index = 0
+        max_index = 0
+        for k in final_report:
+            ticker = final_report[k][0][0]
+            last_close = final_report[k][0][1]
+            print(f'\tticker: {ticker} --- last_close: {last_close}')
+            # self.open_url(driver, ticker)
+            if index == max_index:
+                break
+            index += 1
+
+        # Search
+        val = ticker
+        tmp_xpath = '/html/body/header/div[1]/div[3]/div[1]/form[3]/input[1]'
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # avg_volume = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        element.send_keys(f'{val}')
+        m = f"Insert value {val}"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # section: Advanced Chart 
+        # Advanced Chart
+        tmp_xpath = '/html/body/header/div[1]/div[3]/div[1]/form[3]/button[2]'
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        element.click()
+        m = "Clicked Advanced Chart"
+        print(f'{m}')
+
+        time.sleep(s0)
+
+        # section: time frame
+        # time
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[1]/select[1]/option[9]"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, time_xPath)))
+        element.click()
+        m = "Clicked Time: 6 month"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # Frequency
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[1]/select[2]/option[6]"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, frequency_xPath)))
+        element.click()
+        m = "Clicked Frequency: Daily"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # section: indicator 
+        # indicator drop down
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/h3[3]/a"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, indicators_xPath)))
+        element.click()
+        m = "Clicked Indicator Drop Down"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # Moving Evarage
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[3]/select[1]/option[6]"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, mave_xPath)))
+        element.click()
+        m = "Clicked Moving Evarage"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # empty input
+        val = ""
+        tmp_xpath = '//*[@id="maval"]' # different input field
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # ticker_input = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        element.clear()
+        element.send_keys(val)
+        m = f"Insert value: clear"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # moving average value
+        val = "20 40"
+        tmp_xpath = '//*[@id="maval"]' # input: 20 40
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # avg_volume = wait.until(EC.element_to_be_clickable((By.XPATH, mave_in_xPath)))
+        element.send_keys(f'{val}')
+        m = f"Insert value {val}"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # Lower Indicator 1:
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[3]/select[3]/option[4]"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, li_1_xPath)))
+        element.click()
+        m = "Clicked Lower Indicator 1"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # Lower Indicator 2:
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[3]/select[4]/option[8]"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, li_2_xPath)))
+        element.click()
+        m = "Clicked Lower Indicator 2"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+        
+        # Lower Indicator 3: 
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[3]/select[5]/option[2]"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, li_3_xPath)))
+        element.click()
+        m = "Clicked Lower Indicator 3"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+        
+        # section: chart style
+        # price display drop down
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/h3[4]/a"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # price_display_dd = wait.until(EC.element_to_be_clickable((By.XPATH, price_display_dd)))
+        element.click()
+        m = "Clicked Price Display Drop Down"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # price display
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[4]/select[1]/option[4]"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # price_display = wait.until(EC.element_to_be_clickable((By.XPATH, price_display)))
+        element.click()
+        m = "Clicked Price Display"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        """
+        # chart background
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[4]/select[1]/option[4]"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # chart_bg = wait.until(EC.element_to_be_clickable((By.XPATH, chart_bg)))
+        element.click()
+        m = "Clicked Chart Background"
+        print(f'{m}')
+
+        time.sleep(s0)
+        """
+
+        """
+        # chart size: large
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[2]/div[4]/select[3]/option[3]"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # chart_size = wait.until(EC.element_to_be_clickable((By.XPATH, chart_size)))
+        element.click()
+        m = "Clicked Chart Size"
+        print(f'{m}')
+
+        time.sleep(s0)
+        """
+
+        # generate image
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[3]/input"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # run_screen = wait.until(EC.element_to_be_clickable((By.XPATH, draw_chart)))
+        element.click()
+        m = "Clicked Draw Chart"
+        print(f'{m}')
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # get graph that is just an image
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div/div[3]/table/tbody/tr/td[1]/img"
+        css_selector = "td[class='padded vatop']"
+        element = driver.find_element_by_css_selector(css_selector)
+        # element = driver.find_element_by_xpath(tmp_xpath)
+        # img_elm = wait.until(EC.element_to_be_clickable((By.XPATH, img_xPath)))
+        # img_element = element.get_attribute('outerHTML')
+        # img_element = element.text
+
+        # getting a list and we need first element
+        img_element = element.find_elements_by_tag_name('img')[0].get_attribute('outerHTML')
+        print(f'[0] {ticker}: {img_element}\n')
+
+        img_list.append(img_element)
+        self.write_fragmens(img_element, ticker, index)
+
+        time.sleep(s0)
+        total_run_time = total_run_time + s0
+
+        # init first run to get first ticker
+        ticker = ""
+        last_close = ""
+        index = 1
+        for k in final_report:
+            # we need to start from the second ticker
+            if index >= 2:
+                t1 = datetime.datetime.now().second
+
+                ticker = final_report[k][0][0]
+                last_close = final_report[k][0][1]
+                print(f'ticker: {ticker} --- last_close: {last_close}')
+            
+                
+                # Option 1
+                # --------------------------------------------------------------------------- #
+                img_element = "null"
+                try:
+                    img_element = self.option_1(driver, ticker, index)
+                except Exception as e:
+                    failed_tickers.append(ticker)
+                    print(f'Exception: {e}\n')
+                finally:
+                    self.write_fragmens(img_element, ticker, index)
+
+                    print(f'[{index}] {ticker}: {img_element}')
+                
+                
+                """
+                # empty input
+                val = ""
+                tmp_xpath = '//*[@id="symb"]' # different input field
+                # ticker_input = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+                element = driver.find_element_by_xpath(tmp_xpath)
+                element.clear()
+                element.send_keys(val)
+                m = f"Insert value: clear"
+                print(f'{m}')
+
+                # insert ticker value
+                tmp_xpath = '//*[@id="symb"]' # different input field
+                # ticker_input = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+                element = driver.find_element_by_xpath(tmp_xpath)
+                element.send_keys(f'{ticker}')
+                m = f"Insert value {ticker}"
+                print(f'{m}')
+
+                # generate image
+                # 1: /html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/input[4]
+                # 2: /html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[3]/input
+                tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[3]/input"
+                element = driver.find_element_by_xpath(tmp_xpath)
+                # draw_chart = wait.until(EC.element_to_be_clickable((By.XPATH, draw_chart)))
+                element.click()
+                m = "Clicked Draw Chart"
+                print(f'{m}')
+
+                # time.sleep(s0)
+                
+                img_element = "null"
+                try:
+                    # get graph that is just an image
+                    css_selector = "td[class='padded vatop']"
+                    element = driver.find_element_by_css_selector(css_selector)
+                    
+                    # getting a list and we need first element
+                    img_element = element.find_elements_by_tag_name('img')[0].get_attribute('outerHTML')
+                except Exception as e:
+                    failed_tickers.append(ticker)
+                    print(f'Exception: {e}\n')
+                finally:
+                    img_list.append(img_element)
+                    self.write_fragmens(img_element, ticker)
+
+                    print(f'[{index}] {ticker}: {img_element}')
+                """
+
+                t2 = datetime.datetime.now().second
+                dt = t2 - t1
+                total_run_time = total_run_time + dt
+                print(f'last task [{dt}] seconds --- total run time [{total_run_time}] seconds\n')
+                # --------------------------------------------------------------------------- #
+                
+
+                # Option 2
+                # --------------------------------------------------------------------------- #
+                """
+                img_element = "null"
+                try:
+                    # no candle sticks
+                    # b_url = f'''https://bigcharts.marketwatch.com/advchart/frames/frames.asp?show=&insttype=&symb={ticker}&x=47&y=17&time=7&startdate=1%2F4%2F1999&enddate=1%2F29%2F2021&freq=1&compidx=aaaaa%3A0&comptemptext=&comp=none&ma=5&maval=20+40&uf=0&lf=4&lf2=32&lf3=1&type=2&style=320&size=2&timeFrameToggle=false&compareToToggle=false&indicatorsToggle=false&chartStyleToggle=false&state=10'''
+
+                    # using candle sticks
+                    b_url = f'''https://bigcharts.marketwatch.com/advchart/frames/frames.asp?show=&insttype=&symb={ticker}&x=39&y=12&time=7&startdate=1%2F4%2F1999&enddate=2%2F1%2F2021&freq=1&compidx=aaaaa%3A0&comptemptext=&comp=none&ma=5&maval=20+40&uf=0&lf=4&lf2=32&lf3=1&type=4&style=320&size=2&timeFrameToggle=false&compareToToggle=false&indicatorsToggle=false&chartStyleToggle=false&state=11'''
+
+                    driver.get(b_url)
+
+                    # get graph that is just an image
+                    css_selector = "td[class='padded vatop']"
+                    element = driver.find_element_by_css_selector(css_selector)
+                
+                    # getting a list and we need first element
+                    img_element = element.find_elements_by_tag_name('img')[0].get_attribute('outerHTML')
+                except Exception as e:
+                    failed_tickers.append(ticker)
+                    print(f'Exception: {e}\n')
+                finally:
+                    img_list.append(img_element)
+                    self.write_fragmens(img_element, ticker)
+
+                    print(f'[{index}] {ticker}: {img_element}')
+
+                t2 = datetime.datetime.now().second
+                dt = t2 - t1
+                total_run_time = total_run_time + dt
+                print(f'last task [{dt}] seconds --- total run time [{total_run_time}] seconds\n')
+                # --------------------------------------------------------------------------- #
+                """
+
+            index += 1
+
+        if len(failed_tickers) > 0:
+            print(f'Failed tickers: {len(failed_tickers)}')
+            for t in failed_tickers:
+                print(f'Failed ticker: {t}')
+            print(f'\n')
+
+        return img_list
+
+    def option_1(self, driver, ticker):
+
+        # Option 1
+        # --------------------------------------------------------------------------- #
+        # empty input
+        val = ""
+        tmp_xpath = '//*[@id="symb"]' # different input field
+        # ticker_input = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        element = driver.find_element_by_xpath(tmp_xpath)
+        element.clear()
+        element.send_keys(val)
+        m = f"Insert value: clear"
+        print(f'{m}')
+
+        # insert ticker value
+        tmp_xpath = '//*[@id="symb"]' # different input field
+        # ticker_input = wait.until(EC.element_to_be_clickable((By.XPATH, tmp_xpath)))
+        element = driver.find_element_by_xpath(tmp_xpath)
+        element.send_keys(f'{ticker}')
+        m = f"Insert value {ticker}"
+        print(f'{m}')
+
+        # generate image
+        # 1: /html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/input[4]
+        # 2: /html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[3]/input
+        tmp_xpath = "/html/body/div[1]/div[2]/table/tbody/tr/td[1]/form/div[3]/input"
+        element = driver.find_element_by_xpath(tmp_xpath)
+        # draw_chart = wait.until(EC.element_to_be_clickable((By.XPATH, draw_chart)))
+        element.click()
+        m = "Clicked Draw Chart"
+        print(f'{m}')
+
+        # time.sleep(s0)
+                
+        img_element = "null"
+        try:
+            # get graph that is just an image
+            css_selector = "td[class='padded vatop']"
+            element = driver.find_element_by_css_selector(css_selector)
+                    
+            # getting a list and we need first element
+            img_element = element.find_elements_by_tag_name('img')[0].get_attribute('outerHTML')
+        except Exception as e:
+            print(f'Exception: {e}\n')
+
+        # --------------------------------------------------------------------------- #
+
+        return img_element
+
+
+    # this method has a GET URL that has predefined parameters fot the char
+    # we only have to provide a ticker name
+    def open_url(self, driver, ticker):
+        # b_url = f'''https://bigcharts.marketwatch.com/advchart/frames/frames.asp?show=&insttype=&symb={ticker}&x=47&y=17&time=7&startdate=1%2F4%2F1999&enddate=1%2F29%2F2021&freq=1&compidx=aaaaa%3A0&comptemptext=&comp=none&ma=5&maval=20+40&uf=0&lf=4&lf2=32&lf3=1&type=2&style=320&size=2&timeFrameToggle=false&compareToToggle=false&indicatorsToggle=false&chartStyleToggle=false&state=10'''
+
+        # using candle sticks
+        b_url = f'''https://bigcharts.marketwatch.com/advchart/frames/frames.asp?show=&insttype=&symb={ticker}&x=39&y=12&time=7&startdate=1%2F4%2F1999&enddate=2%2F1%2F2021&freq=1&compidx=aaaaa%3A0&comptemptext=&comp=none&ma=5&maval=20+40&uf=0&lf=4&lf2=32&lf3=1&type=4&style=320&size=2&timeFrameToggle=false&compareToToggle=false&indicatorsToggle=false&chartStyleToggle=false&state=11'''
+
+        driver.get(b_url)
+
+        return b_url
+        
