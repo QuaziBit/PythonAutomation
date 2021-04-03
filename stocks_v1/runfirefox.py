@@ -1,3 +1,4 @@
+# Author: Olexandr "Alex" Matveyev
 import time
 import datetime
 import requests
