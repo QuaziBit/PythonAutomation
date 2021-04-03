@@ -1,3 +1,4 @@
+# Author: Olexandr "Alex" Matveyev
 import os
 import sys
 import time
