@@ -1,3 +1,4 @@
+# Author: Olexandr "Alex" Matveyev
 import os
 import csv
 
