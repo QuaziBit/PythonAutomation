@@ -13,6 +13,11 @@ Output: here we have all-ascending.csv, all-descending.csv, and all-no-sorting.c
 These files are CSV files and they should store final and combined data from the downloaded CSV files.
 Before combining downloaded CSV files and create new data report these files will be cleared.
 ## 4: view directory
+View: here we have a basic index.html and CSS files.
+After running this application you need to copy the final generated html content from the output.html into the index.html.
+
+# output.html
+Output.html file: here are stored retrieved stock graphs as partial table.
 
 # What must be installed
 1: Python 3.8.6 62-bit
@@ -39,6 +44,4 @@ Before combining downloaded CSV files and create new data report these files wil
 4: for ascending order > py .\run.py ascending \
 5: for descending order > py .\run.py descending \
 6: for unsorted order > py .\run.py or py .\run.py no-sorting
-
-# Output
 
