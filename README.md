@@ -3,8 +3,15 @@ Automation of web browsers for stock trading
 
 # Project structure
 ## 1: download directory
+Download: the CSV files will be download into this directory and after combining all CSV files
+into the one this directory will be cleared.
 ## 2: drivers directory
+Drivers: here we have drivers for Chrome web-browser and for FireFox web-browser.
+Currently Chrome web-browser is not included and is not used.
 ## 3: output directory
+Output: here we have all-ascending.csv, all-descending.csv, and all-no-sorting.csv files.
+These files are CSV files and they should store final and combined data from the downloaded CSV files.
+Before combining downloaded CSV files and create new data report these files will be cleared.
 ## 4: view directory
 
 # What must be installed
