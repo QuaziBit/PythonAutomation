@@ -5,8 +5,19 @@ Automation of web browsers for stock trading
 1: Python 3.8.6 62-bit
 
 # How to create virtual environment
+1: > mkdir myproject
+2: > cd myproject
+3: > py -3 -m venv stocks_v1
 
 # Python 3 packages must be installed
+1: Navigate to stocks_v1 directory
+2: > .\Scripts\Activate.ps1
+3: Install following packages:
+4: pip3 install selenium
+5: pip3 install requests
+6: pip3 install urllib3
+7: pip3 install beautifulsoup4
+8: pip3 install lxml
 
 # How to run:
 1: Navigate to stocks_v1 directory
